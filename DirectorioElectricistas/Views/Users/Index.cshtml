@@ -1,0 +1,56 @@
+﻿@model IEnumerable<DirectorioElectricistas.Models.Users>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Usuarios</h1>
+<p class="mb-3">
+    En esta sección, podrás registrar un nuevo usuario administrador.
+
+</p>
+
+<div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+        <a class="btn btn-warning" asp-action="Create">Crear</a>
+        
+    </div>
+</div>
+
+
+<div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Usuario
+            </th>
+            
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+                <tr>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="align-middle">
+                        <div class="d-flex flex-column align-items-center">
+                            <!-- Fila 2: Botones de Editar y Eliminar -->
+                            <div class="d-flex w-100 justify-content-center">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm fixed-size me-2" data-bs-toggle="tooltip" title="Editar">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm fixed-size" data-bs-toggle="tooltip" title="Eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+}
+    </tbody>
+</table>
+</div>

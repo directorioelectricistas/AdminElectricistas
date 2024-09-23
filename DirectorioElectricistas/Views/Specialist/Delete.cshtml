@@ -1,0 +1,102 @@
+﻿@model DirectorioElectricistas.Models.Specialist
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Está seguro que desea borrar este registro?</h3>
+<div>
+    
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Nombre
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Número tarjeta profesional
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CardId)
+        </dd>
+        <dt class="col-sm-2">
+            Número de contacto
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Number)
+        </dd>
+        <dt class="col-sm-2">
+            Correo electrónico
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Email
+        </dd>
+        <dt class="col-sm-2">
+            Departamento
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Place)
+        </dd>
+        <dt class="col-sm-2">
+            Municipio
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MainPlace)
+        </dd>
+        <dt class="col-sm-2">
+            Estado
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.State)
+        </dd>
+        <dt class="col-sm-2">
+            Calificación
+        </dt>
+        <dd class="col-sm-10 d-flex align-items-center">
+            @{
+                double qualificationValue;
+                bool isNumeric = double.TryParse(Model.Qualification, out qualificationValue);
+            }
+            @if (!isNumeric || qualificationValue == 0)
+            {
+                <span>Sin calificación</span>
+            }
+            else
+            {
+                <div class="star-rating">
+                    <span class="filled" style="width:@((qualificationValue / 5.0) * 100)%">
+                        &#9733;&#9733;&#9733;&#9733;&#9733;
+                    </span>
+                    <span>
+                        &#9733;&#9733;&#9733;&#9733;&#9733;
+                    </span>
+                </div>
+            }
+        </dd>
+        <dt class="col-sm-2 mt-2">
+            Imágen
+        </dt>
+        <dd class="col-sm-10 mt-2">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <img src="data:image/png;base64,@Model.ImageUrl" alt="Image" style="width:100px; height:auto;" class="img-thumbnail" />
+            }
+            else
+            {
+                <span>No image</span>
+            }
+        </dd>
+
+    </dl>
+    
+    <hr />
+
+    <form asp-action="Delete">
+        <input type="submit" value="Eliminar" class="btn btn-warning" /> 
+        <a asp-action="Index" class="btn btn-secondary ms-2">Regresar</a>
+    </form>
+
+    
+</div>

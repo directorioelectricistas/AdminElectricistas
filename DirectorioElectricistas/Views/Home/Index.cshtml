@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center mt-4">
+    <!-- Título -->
+    <h1 class="display-3 font-weight-bold">Bienvenido</h1>
+
+    <!-- Subtítulo -->
+    <p class="lead mb-4">
+        En esta sección del directorio de electricistas, podrás visualizar todos los registros realizados por los usuarios. Tendrás la capacidad de aprobar, editar o eliminar dichos registros según sea necesario. Además, podrás generar un informe que incluya todos los registros acumulados hasta la fecha actual.
+    </p>
+
+    <div class="container mt-3">
+        <!-- Botón Bonito -->
+        <div class="text-center mb-4">
+            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Specialist" asp-action="Index">Especialistas</a>
+        </div>
+
+        <!-- Texto Importante -->
+        <div class="alert alert-secondary mb-3" role="alert">
+            <strong>Es importante destacar que, aunque la plataforma facilita la conexión y/o comunicación entre técnicos electricistas y las personas que requieran sus servicios, la EBSA ESP no se hace responsable de la veracidad de la información proporcionada por los técnicos. Esto significa que los usuarios deben ejercer su propio juicio al seleccionar un técnico electricista.</strong>
+        </div>
+
+        <!-- Imagen -->
+        <div class="text-center mt-4">
+            <img src="/images/logo.png" alt="Logo" class="img-fluid" style="max-width: 200px;">
+        </div>
+    </div>
+</div>
+

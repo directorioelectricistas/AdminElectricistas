@@ -1,0 +1,7 @@
+## Ignore Visual Studio temporary files, build results, and
+## folder-based project outputs
+**/.vs/
+**/bin/
+**/obj/
+**/out/
+.vscode/

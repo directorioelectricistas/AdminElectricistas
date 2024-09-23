@@ -1,0 +1,27 @@
+﻿@model DirectorioElectricistas.Models.Users
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Está seguro que desea borrar este registro?</h3>
+<div>
+
+    <hr />
+    
+    
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Usuario
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Eliminar" class="btn btn-warning" />
+        <a asp-action="Index" class="btn btn-secondary ms-2">Regresar</a>
+    </form>
+</div>

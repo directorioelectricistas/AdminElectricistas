@@ -1,0 +1,109 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Directorio Electricistas</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DirectorioElectricistas.styles.css" asp-append-version="true" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link rel="icon" href="~/images/relampago.png" type="image/png" />
+    <style>
+        html, body {
+            height: 100%; /* Asegura que el body y html ocupen el 100% de la altura */
+            margin: 0; /* Elimina márgenes por defecto */
+            display: flex;
+            flex-direction: column;
+        }
+
+            body::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-image: url('/images/encendiendo.png');
+                background-repeat: repeat;
+                background-size: 700px 700px; /* Tamaño más pequeño */
+                opacity: 0.07; /* Ajusta la opacidad solo de la imagen de fondo */
+                z-index: -1; /* Asegura que la imagen esté detrás de todo el contenido */
+            }
+
+        .container, .card, h1 {
+            position: relative;
+            z-index: 1; /* Mantén el contenido principal por encima de la imagen de fondo */
+        }
+
+        footer {
+            background-color: #f8f9fa; /* Fondo sólido para el footer */
+            position: relative;
+            z-index: 1; /* Asegura que el footer esté encima de la imagen de fondo */
+            margin-top: auto; /* Asegura que el footer se empuje hacia abajo */
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333; /* Color del texto del título */
+        }
+
+        .card-body {
+            background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco semi-transparente para la tarjeta */
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .btn-submit-wrapper {
+            display: flex;
+            justify-content: center; /* Centra el botón horizontalmente */
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex flex-column justify-content-center align-items-center flex-grow-1">
+        <div class="row justify-content-center w-100">
+            <div class="col-md-6 col-lg-4">
+                <h1 class="text-center">Directorio de Electricistas</h1> <!-- Título agregado -->
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" asp-action="Login" asp-controller="Auth">
+                            <div class="form-group mb-3">
+                                <label for="username">Usuario</label>
+                                <input type="text" class="form-control" id="username" name="username" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Contraseña</label>
+                                <input type="password" class="form-control" id="password" name="password" required />
+                            </div>
+                            @if (ViewBag.ErrorMessage != null)
+                            {
+                                <div class="alert alert-danger mt-3">@ViewBag.ErrorMessage</div>
+                            }
+                            <div class="btn-submit-wrapper mt-4">
+                                <button type="submit" class="btn btn-warning">Ingresar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted mt-auto">
+        <div class="container text-center py-3">
+            &copy; 2024 | DirectorioElectricistas | Empresa de Energía de Boyacá S.A E.S.P | Tunja, Boyacá, Colombia
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
