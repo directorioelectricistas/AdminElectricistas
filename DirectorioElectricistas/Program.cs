@@ -13,8 +13,9 @@ builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpS
 // Registrar EmailService en el contenedor de servicios
 builder.Services.AddTransient<EmailService>();
 
-// Servicio password
+//Servicio password
 builder.Services.AddSingleton<PasswordService>();
+
 
 // Configurar la autenticación con cookies
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -22,14 +23,14 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/Auth/Login";
         options.LogoutPath = "/Auth/Logout";
-        options.AccessDeniedPath = "/Auth/AccessDenied";
+        options.AccessDeniedPath = "/Auth/AccessDenied"; // Ruta para acceso denegado si es necesario
     });
 
 // Configurar la sesión
-builder.Services.AddDistributedMemoryCache();
+builder.Services.AddDistributedMemoryCache(); // Usar caché en memoria para la sesión
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Establecer tiempo de espera
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
@@ -43,8 +44,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// Comentar HTTPS redirection temporalmente para Vercel
-// app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -56,9 +56,15 @@ app.UseAuthorization();
 // Configurar sesión
 app.UseSession();
 
-// Cambiar temporalmente la ruta por defecto a Home/Index para pruebas
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Auth}/{action=Login}/{id?}");
+
+// Mueve esta configuración a la parte superior para que sea la primera ruta verificada
+app.MapControllerRoute(
+    name: "home",
+    pattern: "{controller=Home}/{action=Index}/{id?}")
+    .RequireAuthorization(); // Asegura que la ruta esté protegida
+
 
 app.Run();
