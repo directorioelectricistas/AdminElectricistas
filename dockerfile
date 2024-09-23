@@ -13,13 +13,16 @@ COPY . .
 WORKDIR "/src/DirectorioElectricistas"
 RUN dotnet build "DirectorioElectricistas.csproj" -c Release -o /app/build
 
-# Publicar la aplicación
+# Etapa 2: Publicar la aplicación
+FROM build AS publish
 RUN dotnet publish "DirectorioElectricistas.csproj" -c Release -o /app/publish
 
-# Etapa 2: Configurar una imagen más ligera para ejecutar la aplicación
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+# Etapa 3: Configurar una imagen más ligera para ejecutar la aplicación
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
 WORKDIR /app
-COPY --from=build /app/publish .
+
+# Copiar los archivos publicados desde la etapa anterior
+COPY --from=publish /app/publish .
 
 # Exponer el puerto 80 para la aplicación
 EXPOSE 80
